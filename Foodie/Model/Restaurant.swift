@@ -11,8 +11,8 @@ import Foundation
 struct Restaurant: Codable {
     let name: String
     let address: String
-    let latitude: Double
-    let longitude: Double
+    let latitude: String
+    let longitude: String
     let cuisines: String
     let timings: String
     let priceRange: Int
@@ -22,6 +22,7 @@ struct Restaurant: Codable {
     let votes: String
     
     enum CodingKeys: String, CodingKey {
+        case restaurant = "restaurant"
         case name = "name"
         case location = "location"
         case address = "address"
@@ -38,15 +39,17 @@ struct Restaurant: Codable {
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let upperContainer = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let container = try upperContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .restaurant)
         
         self.name = try container.decode(String?.self, forKey: .name) ?? "No name"
         
         let locationContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .location)
         
         self.address = try locationContainer.decode(String?.self, forKey: .address) ?? "-"
-        self.latitude = try locationContainer.decode(Double?.self, forKey: .latitude) ?? 0
-        self.longitude = try locationContainer.decode(Double?.self, forKey: .longitude) ?? 0
+        self.latitude = try locationContainer.decode(String?.self, forKey: .latitude) ?? "0"
+        self.longitude = try locationContainer.decode(String?.self, forKey: .longitude) ?? "0"
         
         self.cuisines = try container.decode(String?.self, forKey: .cuisines) ?? "Unspecified cuisine"
         
@@ -56,8 +59,8 @@ struct Restaurant: Codable {
         
         let ratingContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .userRating)
         
-        if let rating = try ratingContainer.decode(Double?.self, forKey: .aggregateRating) {
-            self.aggregateRating = String(rating)
+        if let rating = try ratingContainer.decode(String?.self, forKey: .aggregateRating) {
+            self.aggregateRating = rating
         } else {
             self.aggregateRating = "-"
         }
@@ -66,8 +69,8 @@ struct Restaurant: Codable {
         
         self.ratingColor = try ratingContainer.decode(String?.self, forKey: .ratingColor) ?? ""
         
-        if let votes = try ratingContainer.decode(Int?.self, forKey: .votes) {
-            self.votes = String(votes)
+        if let votes = try ratingContainer.decode(String?.self, forKey: .votes) {
+            self.votes = votes
         } else {
             self.votes = "0"
         }
@@ -94,5 +97,20 @@ struct Restaurant: Codable {
         try ratingContainer.encode(self.ratingText, forKey: .ratingText)
         try ratingContainer.encode(self.ratingColor, forKey: .ratingColor)
         try ratingContainer.encode(self.votes, forKey: .votes)
+    }
+}
+
+
+struct RestaurantSearchResults: Codable {
+    let restaurants: [Restaurant]
+    let resultsFound: Int
+    let resultsStart: Int
+    let resultsShown: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case restaurants = "restaurants"
+        case resultsFound = "results_found"
+        case resultsStart = "results_start"
+        case resultsShown = "results_shown"
     }
 }

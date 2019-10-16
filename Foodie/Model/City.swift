@@ -13,7 +13,7 @@ struct City: Codable {
     let name: String
 }
 
-struct SearchResult: Codable {
+struct CitySearchResults: Codable {
     let locations: [City]
     
     enum CodingKeys: String, CodingKey {

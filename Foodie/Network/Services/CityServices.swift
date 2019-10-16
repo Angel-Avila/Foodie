@@ -15,11 +15,11 @@ protocol CityServices {
 
 class FoodieCityServices: CityServices {
     
-    private let modelRepository: ModelRepository<SearchResult>
+    private let modelRepository: ModelRepository<CitySearchResults>
     
     init(networkClient: NetworkClient = FoodieNetworkClient()) {
         let networkService: (client: NetworkClient, requestBuilder: RequestBuilder) = (client: networkClient, requestBuilder: FoodieRequestBuilder(baseURL: FoodieAPI.apiURL))
-        modelRepository = ModelRepository<SearchResult>(networkService: networkService)
+        modelRepository = ModelRepository<CitySearchResults>(networkService: networkService)
     }
     
     func getCity(query: String, completion: @escaping (Result<City>) -> Void) {

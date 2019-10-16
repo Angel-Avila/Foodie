@@ -17,7 +17,7 @@ enum NavigationView {
     case search
     
     /// A view controller that displays the restaurants in the specified area
-    case discover(city: City)
+    case discover(city: City, restaurants: [Restaurant])
     
     /// A view controller that displays the details from a selected restaurant
     case restaurantDetail
@@ -29,6 +29,7 @@ enum NavigationView {
 class DefaultComponentProvider: ComponentProvider {
     
     let cityService = FoodieCityServices()
+    let restaurantService = FoodieRestaurantServices()
     
     /// Returns a `UIViewController` depending on which `NavigationView` enum case you sent.
     ///
@@ -38,13 +39,13 @@ class DefaultComponentProvider: ComponentProvider {
         switch view {
             
         case .root:
-            return SearchViewController(service: cityService)
+            return SearchViewController(cityServices: cityService, restaurantServices: restaurantService)
             
         case .search:
-            return SearchViewController(service: cityService)
+            return SearchViewController(cityServices: cityService, restaurantServices: restaurantService)
         
-        case .discover(let city):
-            return DiscoverViewController(city: city)
+        case .discover(let city, let restaurants):
+            return DiscoverViewController(city: city, service: restaurantService, restaurants: restaurants)
             
         default:
             return UIViewController(nibName: nil, bundle: nil)

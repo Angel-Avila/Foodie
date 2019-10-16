@@ -36,6 +36,8 @@
 		0BDA02252356B964001CDA5E /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA02242356B964001CDA5E /* DiscoverViewController.swift */; };
 		0BDA02272356B97C001CDA5E /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA02262356B97C001CDA5E /* DiscoverView.swift */; };
 		0BDA02292356BF4C001CDA5E /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA02282356BF4C001CDA5E /* Restaurant.swift */; };
+		0BDA022C2357962C001CDA5E /* RestaurantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA022B2357962C001CDA5E /* RestaurantAPI.swift */; };
+		0BDA022E23579799001CDA5E /* RestaurantServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA022D23579799001CDA5E /* RestaurantServices.swift */; };
 		4E77F5121F0C52A48E8BDAA7 /* Pods_Foodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7795FEE522A74B0DFC9772E1 /* Pods_Foodie.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		0BDA02242356B964001CDA5E /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		0BDA02262356B97C001CDA5E /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		0BDA02282356BF4C001CDA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		0BDA022B2357962C001CDA5E /* RestaurantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAPI.swift; sourceTree = "<group>"; };
+		0BDA022D23579799001CDA5E /* RestaurantServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantServices.swift; sourceTree = "<group>"; };
 		2BD2CFE194E774790107C538 /* Pods-Foodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodie.debug.xcconfig"; path = "Target Support Files/Pods-Foodie/Pods-Foodie.debug.xcconfig"; sourceTree = "<group>"; };
 		48DDDB3E7A353B7E817D4DA2 /* Pods-Foodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodie.release.xcconfig"; path = "Target Support Files/Pods-Foodie/Pods-Foodie.release.xcconfig"; sourceTree = "<group>"; };
 		7795FEE522A74B0DFC9772E1 /* Pods_Foodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				0BDA021423569CB4001CDA5E /* CommonAPI.swift */,
+				0BDA022B2357962C001CDA5E /* RestaurantAPI.swift */,
 			);
 			path = EndpointAPIS;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				0BDA02182356A671001CDA5E /* CityServices.swift */,
+				0BDA022D23579799001CDA5E /* RestaurantServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 				0BDA01F1235670EF001CDA5E /* ViewController.swift in Sources */,
 				0BDA021523569CB4001CDA5E /* CommonAPI.swift in Sources */,
 				0BDA01FA235672EF001CDA5E /* UIFont+.swift in Sources */,
+				0BDA022E23579799001CDA5E /* RestaurantServices.swift in Sources */,
 				0BDA01EF23566FA5001CDA5E /* SearchViewController.swift in Sources */,
 				0BDA0201235691D3001CDA5E /* TextField.swift in Sources */,
 				0BDA01F8235672A9001CDA5E /* UILabel+.swift in Sources */,
@@ -377,6 +384,7 @@
 				0BDA020423569663001CDA5E /* ModelRepository.swift in Sources */,
 				0BDA01F5235671D5001CDA5E /* SearchView.swift in Sources */,
 				0BDA01EB23566BC5001CDA5E /* DefaultComponentProvider.swift in Sources */,
+				0BDA022C2357962C001CDA5E /* RestaurantAPI.swift in Sources */,
 				0BDA02192356A671001CDA5E /* CityServices.swift in Sources */,
 				0BDA020C23569731001CDA5E /* Route.swift in Sources */,
 				0BDA01D723566B08001CDA5E /* AppDelegate.swift in Sources */,

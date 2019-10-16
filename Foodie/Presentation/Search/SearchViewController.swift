@@ -10,10 +10,12 @@ import UIKit
 
 class SearchViewController: ViewController<SearchView> {
     
-    private let service: CityServices
+    private let cityServices: CityServices
+    private let restaurantServices: RestaurantServices
     
-    init(service: CityServices) {
-        self.service = service
+    init(cityServices: CityServices, restaurantServices: RestaurantServices) {
+        self.cityServices = cityServices
+        self.restaurantServices = restaurantServices
         super.init(showsNavBar: true, title: "Foodie")
         controllerView = SearchView()
     }
@@ -29,19 +31,36 @@ class SearchViewController: ViewController<SearchView> {
     }
     
     @objc private func searchButtonPressed() {
-        service.getCity(query: controllerView.query) { [weak self] result in
+        cityServices.getCity(query: controllerView.query) { [weak self] result in
             guard let strongSelf = self else { return }
+            
             switch result {
                 
             case .success(let city):
-                let navigator = strongSelf.getNavigator()
-                navigator?.setBackButtonItemTitle(to: "")
-                navigator?.navigate(.push(view: .discover(city: city)), strongSelf)
+                strongSelf.getRestaurants(forCity: city)
                 
             case .failure(let error):
-                print("Failure:", error)
+                print("City search failure:", error)
             }
             
+        }
+    }
+    
+    private func getRestaurants(forCity city: City) {
+        restaurantServices.getRestaurants(cityId: city.id) { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            switch result {
+                
+            case .success(let restaurants):
+                let navigator = strongSelf.getNavigator()
+                navigator?.setBackButtonItemTitle(to: "")
+                navigator?.navigate(.push(view: .discover(city: city, restaurants: restaurants)), strongSelf)
+            
+            case .failure(let error):
+                print("Restaurant search failure:", error)
+                
+            }
         }
     }
 }
