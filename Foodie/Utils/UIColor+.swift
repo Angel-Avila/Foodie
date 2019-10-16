@@ -53,6 +53,10 @@ extension UIColor {
         return UIColor(white: 0.8, alpha: 1)
     }
     
+    @nonobjc class var almostWhiteBackground: UIColor {
+        return UIColor(hex: "FEFEFE")
+    }
+    
     @nonobjc class var main: UIColor {
         return UIColor(hex: "007AFF")
     }

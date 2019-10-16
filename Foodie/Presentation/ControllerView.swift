@@ -17,7 +17,7 @@ class ControllerView: UIView, View {
 
     init() {
         super.init(frame: .zero)
-        backgroundColor = .white
+        backgroundColor = .almostWhiteBackground
     }
     
     required init?(coder aDecoder: NSCoder) {

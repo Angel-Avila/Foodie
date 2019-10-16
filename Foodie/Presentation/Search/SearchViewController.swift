@@ -29,11 +29,15 @@ class SearchViewController: ViewController<SearchView> {
     }
     
     @objc private func searchButtonPressed() {
-        service.getCity(query: controllerView.query) { result in
-            
+        service.getCity(query: controllerView.query) { [weak self] result in
+            guard let strongSelf = self else { return }
             switch result {
+                
             case .success(let city):
-                print("Success:", city)
+                let navigator = strongSelf.getNavigator()
+                navigator?.setBackButtonItemTitle(to: "")
+                navigator?.navigate(.push(view: .discover(city: city)), strongSelf)
+                
             case .failure(let error):
                 print("Failure:", error)
             }

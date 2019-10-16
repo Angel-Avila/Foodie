@@ -17,7 +17,7 @@ enum NavigationView {
     case search
     
     /// A view controller that displays the restaurants in the specified area
-    case discover
+    case discover(city: City)
     
     /// A view controller that displays the details from a selected restaurant
     case restaurantDetail
@@ -43,6 +43,9 @@ class DefaultComponentProvider: ComponentProvider {
         case .search:
             return SearchViewController(service: cityService)
         
+        case .discover(let city):
+            return DiscoverViewController(city: city)
+            
         default:
             return UIViewController(nibName: nil, bundle: nil)
         }

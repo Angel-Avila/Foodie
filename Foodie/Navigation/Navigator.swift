@@ -88,6 +88,12 @@ class Navigator {
         }
     }
     
+    func setBackButtonItemTitle(to title: String) {
+        let backButton = UIBarButtonItem()
+        backButton.title = title
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    
     func setNavigationControllerRoot(_ view: NavigationView, animated: Bool = true) {
         navigationController.setViewControllers([provider.resolve(view)], animated: animated)
     }

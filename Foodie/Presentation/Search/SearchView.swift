@@ -29,6 +29,7 @@ class SearchView: ControllerView {
         button.backgroundColor = .main
         button.tintColor = .white
         button.layer.cornerRadius = 5
+        button.float(shadowColor: .main)
         return button
     }()
     
@@ -39,6 +40,7 @@ class SearchView: ControllerView {
         button.titleLabel?.font = UIFont.demiBold.withSize(22)
         button.backgroundColor = .main
         button.layer.cornerRadius = DesignConstants.searchButtonSize.height / 2
+        button.float(shadowColor: .main)
         return button
     }()
     
