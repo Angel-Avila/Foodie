@@ -11,8 +11,8 @@ import Foundation
 struct Restaurant: Codable {
     let name: String
     let address: String
-    let latitude: String
-    let longitude: String
+    let latitude: Double
+    let longitude: Double
     let cuisines: String
     let timings: String
     let priceRange: Int
@@ -48,32 +48,35 @@ struct Restaurant: Codable {
         let locationContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .location)
         
         self.address = try locationContainer.decode(String?.self, forKey: .address) ?? "-"
-        self.latitude = try locationContainer.decode(String?.self, forKey: .latitude) ?? "0"
-        self.longitude = try locationContainer.decode(String?.self, forKey: .longitude) ?? "0"
         
+        if let latitudeString = try locationContainer.decode(String?.self, forKey: .latitude),
+            let latitude = Double(latitudeString) {
+            self.latitude = latitude
+        } else {
+            self.latitude = 0
+        }
+        
+        if let longitudeString = try locationContainer.decode(String?.self, forKey: .longitude),
+            let longitude = Double(longitudeString) {
+            self.longitude = longitude
+        } else {
+            self.longitude = 0
+        }
+
         self.cuisines = try container.decode(String?.self, forKey: .cuisines) ?? "Unspecified cuisine"
-        
+        		
         self.timings = try container.decode(String?.self, forKey: .timings) ?? "-"
         
         self.priceRange = try container.decode(Int?.self, forKey: .priceRange) ?? -1
         
         let ratingContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .userRating)
         
-        if let rating = try ratingContainer.decode(String?.self, forKey: .aggregateRating) {
-            self.aggregateRating = rating
-        } else {
-            self.aggregateRating = "-"
-        }
-        
+        self.aggregateRating = try ratingContainer.decode(String?.self, forKey: .aggregateRating) ?? "-"
         self.ratingText = try ratingContainer.decode(String?.self, forKey: .ratingText) ?? ""
         
         self.ratingColor = try ratingContainer.decode(String?.self, forKey: .ratingColor) ?? ""
         
-        if let votes = try ratingContainer.decode(String?.self, forKey: .votes) {
-            self.votes = votes
-        } else {
-            self.votes = "0"
-        }
+        self.votes = try ratingContainer.decode(String?.self, forKey: .votes) ?? "0"
     }
     
     func encode(to encoder: Encoder) throws {
