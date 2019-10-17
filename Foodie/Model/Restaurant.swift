@@ -15,7 +15,8 @@ struct Restaurant: Codable {
     let longitude: Double
     let cuisines: String
     let timings: String
-    let priceRange: Int
+    let priceRange: String
+    let thumbnail: String
     let aggregateRating: String
     let ratingText: String
     let ratingColor: String
@@ -31,6 +32,7 @@ struct Restaurant: Codable {
         case cuisines = "cuisines"
         case timings = "timings"
         case priceRange = "price_range"
+        case thumbnail = "thumb"
         case userRating = "user_rating"
         case aggregateRating = "aggregate_rating"
         case ratingText = "rating_text"
@@ -63,20 +65,41 @@ struct Restaurant: Codable {
             self.longitude = 0
         }
 
-        self.cuisines = try container.decode(String?.self, forKey: .cuisines) ?? "Unspecified cuisine"
-        		
+        if let unformattedCuisines = try container.decode(String?.self, forKey: .cuisines) {
+            let cuisineArray = unformattedCuisines.components(separatedBy: ", ")
+            let delimitedCuisines = cuisineArray.prefix(2)
+            self.cuisines = delimitedCuisines.joined(separator: ", ")
+        } else {
+            self.cuisines = "Unspecified cuisine"
+        }
+
         self.timings = try container.decode(String?.self, forKey: .timings) ?? "-"
         
-        self.priceRange = try container.decode(Int?.self, forKey: .priceRange) ?? -1
+        if let range = try container.decode(Int?.self, forKey: .priceRange) {
+            self.priceRange = String.init(repeating: "$", count: range) + " · "
+        } else {
+            self.priceRange = ""
+        }
+        
+        self.thumbnail = try container.decode(String?.self, forKey: .thumbnail) ?? ""
         
         let ratingContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .userRating)
         
-        self.aggregateRating = try ratingContainer.decode(String?.self, forKey: .aggregateRating) ?? "-"
+        if let rating = try ratingContainer.decode(String?.self, forKey: .aggregateRating) {
+            self.aggregateRating = "\(rating) ⭐️ "
+        } else {
+            self.aggregateRating = ""
+        }
+        
         self.ratingText = try ratingContainer.decode(String?.self, forKey: .ratingText) ?? ""
         
         self.ratingColor = try ratingContainer.decode(String?.self, forKey: .ratingColor) ?? ""
         
-        self.votes = try ratingContainer.decode(String?.self, forKey: .votes) ?? "0"
+        if let votes = try ratingContainer.decode(String?.self, forKey: .votes) {
+            self.votes = "(\(votes))"
+        } else {
+            self.votes = "(0)"
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -93,6 +116,7 @@ struct Restaurant: Codable {
         try container.encode(self.cuisines, forKey: .cuisines)
         try container.encode(self.timings, forKey: .timings)
         try container.encode(self.priceRange, forKey: .priceRange)
+        try container.encode(self.thumbnail, forKey: .thumbnail)
         
         var ratingContainer = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .userRating)
         

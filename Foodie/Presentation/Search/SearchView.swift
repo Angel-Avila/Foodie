@@ -61,6 +61,14 @@ class SearchView: ControllerView {
         super.init(coder: aDecoder)
     }
     
+    func resetErrorState() {
+        searchTextField.layer.borderColor = UIColor.black.cgColor
+    }
+    
+    func displayErrorState() {
+        searchTextField.layer.borderColor = UIColor.errorRed.cgColor
+    }
+    
     override func setupUI() {
         useLocationButton.pin
             .right(DesignConstants.horizontalMargin)

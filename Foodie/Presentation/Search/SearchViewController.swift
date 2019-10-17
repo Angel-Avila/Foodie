@@ -26,8 +26,12 @@ class SearchViewController: ViewController<SearchView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         controllerView.addSearchButtonTarget(target: self, action: #selector(searchButtonPressed), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc private func searchButtonPressed() {
@@ -38,9 +42,15 @@ class SearchViewController: ViewController<SearchView> {
                 
             case .success(let city):
                 strongSelf.getRestaurants(forCity: city)
+                DispatchQueue.main.async {
+                    strongSelf.controllerView.resetErrorState()
+                }
                 
             case .failure(let error):
                 print("City search failure:", error)
+                DispatchQueue.main.async {
+                    strongSelf.controllerView.displayErrorState()
+                }
             }
             
         }

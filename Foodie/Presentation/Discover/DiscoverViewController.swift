@@ -10,6 +10,15 @@ import UIKit
 
 class DiscoverViewController: ViewController<DiscoverView> {
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 1
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .veryLightGray
+        collectionView.showsVerticalScrollIndicator = false
+        return collectionView
+    }()
+    
     private let city: City
     private let service: RestaurantServices
     private var restaurants: [Restaurant]
@@ -28,8 +37,62 @@ class DiscoverViewController: ViewController<DiscoverView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationController?.navigationBar.barTintColor = .white
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        controllerView.pin.all()
+        collectionView.pin.all()
+    }
+    
+    private func setupCollectionView() {
+        controllerView.addSubview(collectionView)
+        controllerView.setNeedsLayout()
         
-        restaurants.forEach { print("\($0.name), \($0.cuisines), Rating: \($0.aggregateRating)⭐") }
+        collectionView.register(RestaurantCell.self, forCellWithReuseIdentifier: String(describing: RestaurantCell.self))
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.reloadData()
+        
+        if restaurants.count == 0 {
+            collectionView.alpha = 0
+            controllerView.showNoResultsLabel()
+        }
+    }
+}
+
+extension DiscoverViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return restaurants.count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let item = restaurants[indexPath.row]
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: RestaurantCell.self), for: indexPath) as! RestaurantCell
+        
+        cell.item = item
+        cell.setNeedsLayout()
+        
+        return cell
+    }
+}
+
+extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: RestaurantCell.preferredHeight)
     }
 }

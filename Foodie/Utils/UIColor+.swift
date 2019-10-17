@@ -50,11 +50,15 @@ extension UIColor {
     }
     
     @nonobjc class var veryLightGray: UIColor {
-        return UIColor(white: 0.8, alpha: 1)
+        return UIColor(white: 0.9, alpha: 1)
     }
     
     @nonobjc class var almostWhiteBackground: UIColor {
         return UIColor(hex: "FEFEFE")
+    }
+    
+    @nonobjc class var midGray: UIColor {
+        return UIColor(white: 0.58, alpha: 1)
     }
     
     @nonobjc class var main: UIColor {

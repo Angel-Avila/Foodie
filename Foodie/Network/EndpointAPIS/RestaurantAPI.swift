@@ -28,10 +28,10 @@ extension RestaurantAPI: Route {
     var parameters: [String: Any]? {
         switch self {
         case .restaurants(let id):
-            return ["entity_id": id as AnyObject,
+            return ["entity_id": String(id) as AnyObject,
                     "entity_type": "city" as AnyObject,
-                    "count": 20 as AnyObject,
-                    "radius": 5000 as AnyObject,
+                    "count": "20" as AnyObject,
+                    "radius": "5000" as AnyObject,
                     "sort": "rating" as AnyObject,
                     "order": "desc" as AnyObject]
         }

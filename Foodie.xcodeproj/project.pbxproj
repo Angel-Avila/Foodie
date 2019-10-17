@@ -38,6 +38,8 @@
 		0BDA02292356BF4C001CDA5E /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA02282356BF4C001CDA5E /* Restaurant.swift */; };
 		0BDA022C2357962C001CDA5E /* RestaurantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA022B2357962C001CDA5E /* RestaurantAPI.swift */; };
 		0BDA022E23579799001CDA5E /* RestaurantServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA022D23579799001CDA5E /* RestaurantServices.swift */; };
+		0BDA023023580F6D001CDA5E /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA022F23580F6D001CDA5E /* RestaurantCell.swift */; };
+		0BDA02322358183B001CDA5E /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDA02312358183B001CDA5E /* UIImageView+.swift */; };
 		4E77F5121F0C52A48E8BDAA7 /* Pods_Foodie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7795FEE522A74B0DFC9772E1 /* Pods_Foodie.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		0BDA02282356BF4C001CDA5E /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		0BDA022B2357962C001CDA5E /* RestaurantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAPI.swift; sourceTree = "<group>"; };
 		0BDA022D23579799001CDA5E /* RestaurantServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantServices.swift; sourceTree = "<group>"; };
+		0BDA022F23580F6D001CDA5E /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		0BDA02312358183B001CDA5E /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		2BD2CFE194E774790107C538 /* Pods-Foodie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodie.debug.xcconfig"; path = "Target Support Files/Pods-Foodie/Pods-Foodie.debug.xcconfig"; sourceTree = "<group>"; };
 		48DDDB3E7A353B7E817D4DA2 /* Pods-Foodie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodie.release.xcconfig"; path = "Target Support Files/Pods-Foodie/Pods-Foodie.release.xcconfig"; sourceTree = "<group>"; };
 		7795FEE522A74B0DFC9772E1 /* Pods_Foodie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foodie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +157,7 @@
 			children = (
 				0BDA01F7235672A9001CDA5E /* UILabel+.swift */,
 				0BDA02212356B84E001CDA5E /* UIView+.swift */,
+				0BDA02312358183B001CDA5E /* UIImageView+.swift */,
 				0BDA0200235691D3001CDA5E /* TextField.swift */,
 				0BDA01FD2356757F001CDA5E /* Icon.swift */,
 				0BDA01F9235672EF001CDA5E /* UIFont+.swift */,
@@ -233,6 +238,7 @@
 		0BDA022A23578E42001CDA5E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0BDA022F23580F6D001CDA5E /* RestaurantCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -393,9 +399,11 @@
 				0BDA0208235696D4001CDA5E /* CancellableToken.swift in Sources */,
 				0BDA021C2356A6B3001CDA5E /* City.swift in Sources */,
 				0BDA01E923566B96001CDA5E /* Navigator.swift in Sources */,
+				0BDA02322358183B001CDA5E /* UIImageView+.swift in Sources */,
 				0BDA01FC23567316001CDA5E /* UIColor+.swift in Sources */,
 				0BDA02252356B964001CDA5E /* DiscoverViewController.swift in Sources */,
 				0BDA020A235696F2001CDA5E /* RequestBuilder.swift in Sources */,
+				0BDA023023580F6D001CDA5E /* RestaurantCell.swift in Sources */,
 				0BDA02222356B84E001CDA5E /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
